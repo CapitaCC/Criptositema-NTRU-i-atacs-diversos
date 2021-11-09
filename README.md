@@ -10,7 +10,7 @@ Per tal de poder executar aquest *script*, en primer lloc cal instal·lar-se *Sa
 https://www.sagemath.org/
 ```
 
-Acte seguit, des del terminal de *SageMath*i dins de la carpeta on es trobi el projecte cal executar la comanda que segueix:
+Acte seguit, des del terminal de *SageMath* i dins de la carpeta on es trobi el projecte cal executar la comanda que segueix:
 
 ```bash
 sage ntru.sage
@@ -18,7 +18,7 @@ sage ntru.sage
 
 ## Fitxers
 
-El projecte conté un total de 7 fitxers d'extensió .sage. Són els següents:
+El projecte conté un total de 7 fitxers d'extensió *.sage*. Són els següents:
 
 - **ntru**: Conté el main *script*.
 
