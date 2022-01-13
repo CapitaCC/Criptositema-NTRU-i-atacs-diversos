@@ -1,0 +1,4 @@
+Aixo es una prova per veure si el criptosistema NTRU funciona amb missatges relativament llargs, amb comes tambe.
+Segona linia.
+3a linia.
+Una altra linia.
