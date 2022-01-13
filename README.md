@@ -1,4 +1,4 @@
-# Criptosistema NTRU
+# Criptosistema NTRU i atacs diversos
 
 *Script* que implementa el criptosistema NTRU i els atacs a la vulnerabilitat dels paràmetres, per força bruta, per trobada a mig camí i per reticles al KRP. Està programat amb la versió 9.2 de *SageMath*.
 
