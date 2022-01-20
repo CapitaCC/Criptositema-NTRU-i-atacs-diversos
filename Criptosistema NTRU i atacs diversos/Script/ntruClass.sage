@@ -26,28 +26,28 @@ class Ntru:
 
 
 
-    def __init__(self, N, p, q, d): #Inicialització dels parametres i dels anells que es requereixen per fer funcionar el criptosistema NTRU.
+    def __init__(self, N, p, q, d, info): #Inicialització dels parametres i dels anells que es requereixen per fer funcionar el criptosistema NTRU.
 
         try:
             assert (N - 1)/2 >= d #Comprovem la condició 1 dels parametres.
 
         except AssertionError:
             print('Cal que (N - 1)/2 >= d')
-            sys.exit(1)
+            info = False
 
         try:
             assert q > (6*d + 1)*p #Comprovem la condició 2 dels parametres.
 
         except AssertionError:
             print('Cal que q > (6*d + 1)*p')
-            sys.exit(1)
+            info = False
 
         try:
             assert q.is_power_of(2) #Comprovem que q sigui potència de 2.
 
         except AssertionError:
             print('q ha de ser potència de 2.')
-            sys.exit(1)
+            info = False
 
         self.N = N
         self.p = p
@@ -66,6 +66,9 @@ class Ntru:
         aux_ring.<x> = PolynomialRing(ZZ.quotient(2))
         self.r_ring_mod_2 = aux_ring.quotient(x^self.N - 1)
 
+        if info:
+            print("Criptosistema NTRU instanciat amb els paràmetres N={}, p={}, q={}, d={}".format(N, p, q, d))
+
 
 
     def gen_priv_keys(self): #Es calculen les claus privades f i g, aixi com tambe els polinomis f_inv_mod_p i f_inv_mod_q.
@@ -78,21 +81,21 @@ class Ntru:
             f_list = gen_ternary_pol(True, self.N, self.d) #S'obtenen els coeficients del polinomi g.
             self.f = self.r_ring(f_list)
 
-            if not self.p.is_power_of(2): #Cas en que p no es potencia de 2
+            if not self.p.is_power_of(2): #Cas en que p no es potencia de 2.
                 aux_f_p = self.r_ring_mod_p(f_list)
 
-                if aux_f_p.is_unit(): #En cas que f tingui invers modul p, es calcula
+                if aux_f_p.is_unit(): #En cas que f tingui invers modul p, es calcula.
                     self.f_inv_mod_p = inv_pol_mod_prime(aux_f_p)
                     aux_f_q = self.r_ring_mod_2(f_list)
 
                     if aux_f_q.is_unit(): #En cas que f tingui invers modul q, s'aplica l'algorisme iteratiu de Newton per obtenir l'invers modul q de f.
                         self.f_inv_mod_q = inv_pol_mod_power_2(self.r_ring_mod_q(f_list), aux_f_q, self.N, self.q)
-                        trobat = True #S'indica que s'ha trobat una clau priva f valida i els seus inversos moduls p i q.
+                        trobat = True #S'indica que s'ha trobat una clau privada f valida i els seus inversos moduls p i q.
 
-            else: #Cas en que p es potencia de 2
+            else: #Cas en que p es potencia de 2.
                 aux_f_p = self.r_ring_mod_2(f_list)
 
-                if aux_f_p.is_unit(): #En cas que f tingui invers modul p, es calcula
+                if aux_f_p.is_unit(): #En cas que f tingui invers modul p, es calcula.
                     self.f_inv_mod_p = inv_pol_mod_power_2(self.r_ring_mod_p(f_list), aux_f_p, self.N, self.p)
                     aux_f_q = self.r_ring_mod_2(f_list)
 
@@ -203,7 +206,6 @@ class Ntru:
 
         except AssertionError:
             print('Missatge massa llarg')
-            sys.exit(1)
 
         z_pol_ring.<x> = PolynomialRing(ZZ)
         m_pol = z_pol_ring(m)
@@ -322,22 +324,3 @@ class Ntru:
     def set_pub_key(self, new_h): #Assigna la clau publica el polinomi per paràmetre.
 
         self.h = new_h
-
-
-
-    def get_f(self): #Retorna la clau privada f.
-
-        return self.f
-
-
-
-    def get_g(self): #Retorna la clau privada g.
-
-        return self.g
-
-
-
-    def print_pol(self): #Imprimeix les claus privades f i g.
-
-        print(self.f)
-        print(self.g)

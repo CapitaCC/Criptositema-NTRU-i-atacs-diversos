@@ -46,21 +46,18 @@ class Param_vulnerability:
 
             except AssertionError:
                 print('Cal que (N - 1)/2 >= d')
-                sys.exit(1)
 
             try:
                 assert args[2] > (6*args[3] + 1)*args[1] #Comprovem la condició 2 dels parametres.
 
             except AssertionError:
                 print('Cal que q > (6*d + 1)*p')
-                sys.exit(1)
 
             try:
                 assert args[2].is_power_of(2) #Comprovem que q sigui potència de 2.
 
             except AssertionError:
                 print('q ha de ser potència de 2.')
-                sys.exit(1)
 
             self.N = args[0]
             self.p = args[1]
@@ -87,8 +84,8 @@ class Param_vulnerability:
         a_list = [] #Llista que conte subllistes corresponents als bits dels submissatges d'una linia de text desencriptada.
         a_def_list = [] #Llista que conte els bits dels submissatges unificats d'una linia de text desencriptada.
         pol_lines_list = [] #llista que conte subllistes referents als coeficients dels missatges encriptats per cada linia de text.
-        gc = gcd(self.q,self.p)
         exit = False
+        gc = gcd(self.q,self.p)
 
         if gc == 1:
             print("{} i {} coprimers, atac impossible de realitzar.".format(self.p, self.q))
@@ -102,14 +99,14 @@ class Param_vulnerability:
                 a_def_list = [bit for polynomial in a_list for bit in polynomial] #S'unifiquen els coeficients dels polinomis a una sola linia.
                 dec_text = "".join(map(chr, np.packbits(np.array(list(a_def_list))))) #Es transformen els bits al text en string corresponent.
                 decrypted_lines_list.append(dec_text+"\n") #S'afegeix un salt de linia al final de cada linia.
-
-            exit = True
+                exit = True
 
         f = open(d_filename, "w") #S'escriu el text desencriptat al fitxer corresponent.
         f.writelines(decrypted_lines_list)
         f.close()
 
         return exit
+
 
 
     def attack_message(self, list_of_encrypted, gc): #S'ataquen el conjunt de submissatges encriptats.
@@ -127,7 +124,7 @@ class Param_vulnerability:
 
         z_pol_ring.<x> = PolynomialRing(ZZ)
         aux_ring.<x> = PolynomialRing(ZZ.quotient(Integer(gc)))
-        r_ring_mod_c = aux_ring.quotient(x^self.N - 1)
+        r_ring_mod_c = aux_ring.quotient(x^self.N - 1) #Es pren modul c per desencriptar el missatge encriptat.
         b = center_lift(r_ring_mod_c(list(e)))
 
         return b

@@ -15,6 +15,22 @@ https://www.sagemath.org/
 
 ```
 
+# *Notebook*
+
+*Notebook* que implementa el criptosistema NTRU i els atacs a la vulnerabilitat dels paràmetres, per força bruta, per trobada a mig camí i per reticles al KRP. A més a més, ofereix el resultat d'una execució amb el temps emprat i comentaris addicionals que en complementen l'explicació. Està programat amb la versió 9.2 de *SageMath*.
+
+## Execució
+
+Un cop descarregat *SageMath*, des del terminal propi de *SageMath* cal executar la comanda que segueix:
+
+```bash
+sage -n jupyter
+```
+
+## Fitxers
+
+El *Notebook* es correspon a un únic fitxer on hi apareixen exactament les mateixes classes presents al *Script*, a excepció del codi del fitxer **ntru**.
+
 # *Script*
 
 *Script* que implementa el criptosistema NTRU i els atacs a la vulnerabilitat dels paràmetres, per força bruta, per trobada a mig camí i per reticles al KRP. Està programat amb la versió 9.2 de *SageMath*.
@@ -46,22 +62,6 @@ El *Script* conté un total de 7 fitxers d'extensió *.sage*. Són els següents
 - **mitmAttack**: Fitxer que conté la classe *Meet\_in\_the\_middle* referent a l'atac per trobada a mig camí.
 
 - **krpRetAttack**: Fitxer que conté la classe *Krp\_lattice* referent a l'atac per reticles al KRP.
-
-# *Notebook*
-
-*Notebook* que implementa el criptosistema NTRU i els atacs a la vulnerabilitat dels paràmetres, per força bruta, per trobada a mig camí i per reticles al KRP. A més a més, ofereix el resultat d'una execució amb el temps emprat i comentaris addicionals que en complementen l'explicació. Està programat amb la versió 9.2 de *SageMath*.
-
-## Execució
-
-Un cop descarregat *SageMath*, des del terminal propi de *SageMath* cal executar la comanda que segueix:
-
-```bash
-sage -n jupyter
-```
-
-## Fitxers
-
-El *Notebook* es correspon a un únic fitxer on hi apareixen exactament les mateixes classes presents al *Script*, a excepció del codi del fitxer **ntru**.
 
 # Autoria
 

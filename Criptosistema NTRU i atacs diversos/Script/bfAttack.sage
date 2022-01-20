@@ -53,21 +53,18 @@ class Brute_force:
 
             except AssertionError:
                 print('Cal que (N - 1)/2 >= d')
-                sys.exit(1)
 
             try:
                 assert args[2] > (6*args[3] + 1)*args[1] #Comprovem la condició 2 dels parametres.
 
             except AssertionError:
                 print('Cal que q > (6*d + 1)*p')
-                sys.exit(1)
 
             try:
                 assert args[2].is_power_of(2) #Comprovem que q sigui potència de 2.
 
             except AssertionError:
                 print('q ha de ser potència de 2.')
-                sys.exit(1)
 
             self.N = args[0]
             self.p = args[1]

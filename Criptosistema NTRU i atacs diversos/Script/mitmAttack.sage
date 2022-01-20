@@ -57,21 +57,18 @@ class Meet_in_the_middle:
 
             except AssertionError:
                 print('Cal que (N - 1)/2 >= d')
-                sys.exit(1)
 
             try:
                 assert args[2] > (6*args[3] + 1)*args[1] #Comprovem la condició 2 dels parametres.
 
             except AssertionError:
                 print('Cal que q > (6*d + 1)*p')
-                sys.exit(1)
 
             try:
                 assert args[2].is_power_of(2) #Comprovem que q sigui potència de 2.
 
             except AssertionError:
                 print('q ha de ser potència de 2.')
-                sys.exit(1)
 
             self.N = args[0]
             self.p = args[1]
@@ -310,31 +307,33 @@ class Meet_in_the_middle:
             num_of_bits = ceil(log(self.q,2)) #Es calcula el nombre de bits que tindra el valor resultant.
             first_bit_list, first_modified_bit_list, first_modified_bit_list_2 = self.convert_to_bits(g1_k_coef_list, num_of_bits) #Es calculen els primers bits de cada coeficient.
             list_of_first_bit_list = []
-            list_of_first_bit_list.append(first_bit_list)
+            list_of_first_bit_list.append(first_bit_list) #S'afegeix la concatenacio dels primers bits dels k primers coeficients.
 
-            for i in range(0,len(first_bit_list)):
+            if not b: #En cas que estiguem classificant a2, cal modificar els k primers coeficients.
 
-                if first_bit_list[i] != first_modified_bit_list[i]:
-                    l = len(list_of_first_bit_list)
+                for i in range(0,len(first_bit_list)): #Per cada bit de la llista, cal comprovar si al modificar el seu coeficients corresponent el valor del bit canvia.
 
-                    for e in range(0,l):
-                        new_list = list_of_first_bit_list[e].copy()
-                        new_list[i] = first_modified_bit_list[i]
-                        list_of_first_bit_list.append(new_list)
+                    if first_bit_list[i] != first_modified_bit_list[i]: #En cas que canvii al sumar 1, cal afegir totes les noves combinacions.
+                        l = len(list_of_first_bit_list)
+
+                        for e in range(0,l): #Iterem entre les combinacions existents fins ara per afegir les noves.
+                            new_list = list_of_first_bit_list[e].copy()
+                            new_list[i] = first_modified_bit_list[i]
+                            list_of_first_bit_list.append(new_list)
 
 
-                if first_bit_list[i] != first_modified_bit_list_2[i]:
-                    l = len(list_of_first_bit_list)
+                    if first_bit_list[i] != first_modified_bit_list_2[i]: #En cas que canvii al restar 1, cal afegir totes les noves combinacions.
+                        l = len(list_of_first_bit_list)
 
-                    for e in range(0,l):
-                        new_list = list_of_first_bit_list[e].copy()
-                        new_list[i] = first_modified_bit_list_2[i]
-                        list_of_first_bit_list.append(new_list)
+                        for e in range(0,l): #Iterem entre les combinacions existents fins ara per afegir les noves.
+                            new_list = list_of_first_bit_list[e].copy()
+                            new_list[i] = first_modified_bit_list_2[i]
+                            list_of_first_bit_list.append(new_list)
 
             counter = 0
             bins_list = []
 
-            for list_of_bits in list_of_first_bit_list:
+            for list_of_bits in list_of_first_bit_list: #Per cada combinacio de bits resultant, cal obtenir el nombre corresponent.
                 counter+=1
 
                 for bit_1 in list_of_bits: #S'obte el nombre corresponent a concatenar els bits.
@@ -349,7 +348,7 @@ class Meet_in_the_middle:
 
                 number_1 = 0
 
-            if not b:
+            if not b: #En cas que estiguem classificant a2, cal retornar els indexs dels calaixos
                 return bins_list
 
         except MemoryError:

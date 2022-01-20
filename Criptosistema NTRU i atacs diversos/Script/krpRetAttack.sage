@@ -50,21 +50,18 @@ class Krp_lattice:
 
             except AssertionError:
                 print('Cal que (N - 1)/2 >= d')
-                sys.exit(1)
 
             try:
                 assert args[2] > (6*args[3] + 1)*args[1] #Comprovem la condició 2 dels parametres.
 
             except AssertionError:
                 print('Cal que q > (6*d + 1)*p')
-                sys.exit(1)
 
             try:
                 assert args[2].is_power_of(2) #Comprovem que q sigui potència de 2.
 
             except AssertionError:
                 print('q ha de ser potència de 2.')
-                sys.exit(1)
 
             self.N = args[0]
             self.p = args[1]
@@ -160,8 +157,7 @@ class Krp_lattice:
         f_list = [] #Llista que conte els coeficients de la clau privada f.
         g_list = [] #Llista que conte els coeficients de la clau privada g.
         M = self.gen_M_matrix() #Es genera la matriu M que defineix el reticle.
-        #reduced_M = M.LLL(algrithm='NTL:LLL', fp= None) #S'aplica l'algorisme LLL per reduir la base del reticle.
-        reduced_M = M.BKZ(algrithm='NTL', fp= None, block_size = 50) #S'aplica l'algorisme BKZ per reduir la base del reticle.
+        reduced_M = M.LLL(algrithm='NTL:LLL', fp= None) #S'aplica l'algorisme LLL per reduir la base del reticle.
         keys_pair_list = list(reduced_M[0]) #S'obtenen les claus privades f i g.
         f_list = keys_pair_list[:self.N] #Es separen les claus privades f i g.
         g_list = keys_pair_list[self.N:]
@@ -200,8 +196,7 @@ class Krp_lattice:
         h_rows_list = [] #Llista que conte totes les files de la submatriu.
         h_list = list(self.h)
 
-        if len(h_list) < self.N: #Si la llista dels seus coeficients es menor que N, s'afegeixen els 0 que calgui al
-                                 #final.
+        if len(h_list) < self.N: #Si la llista dels seus coeficients es menor que N, s'afegeixen els 0 que calgui al final.
             zeros = [0]*(self.N - len(h_list))
             h_list.extend(zeros)
 

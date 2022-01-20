@@ -1,4 +1,4 @@
-Aixo es una prova per veure si el criptosistema NTRU funciona amb missatges relativament llargs, amb comes tambe.
-Segona linia.
-3a linia.
-Una altra linia.
+El criptosistema NTRU data de l'any 1998.
+Es resistent als quantics i un dels 4 criptosistemes finalistes del concurs del NIST.
+Fent servir aquest criptosistema encriptarem aquest missatge i posteriorment el desencriptarem.
+Tambe recuperarem aquest missatge utilitzant 4 dels atacs coneguts vers ell.
